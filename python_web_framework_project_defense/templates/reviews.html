@@ -1,0 +1,17 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+      {% for review in reviews %}
+          <table style="width:50%">
+          <tr>
+          <th>{{ review.title }}</th>
+          <img class="card-img-top" src="{{ review.image.url }}" alt="Card image cap">
+
+          <td>description: {{ review.description }}</td>
+          </tr>
+          <table>
+
+    {% endfor %}
+{% endblock %}
+
+

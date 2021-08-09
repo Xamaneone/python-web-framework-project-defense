@@ -1,0 +1,10 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1>Welcome {{ request.user }}!</h1>
+    {% else %}
+        <h1>Welcome! Don't have an account?</h1>
+        <h1>You can create one from here.</h1>
+    {% endif %}
+{% endblock %}
