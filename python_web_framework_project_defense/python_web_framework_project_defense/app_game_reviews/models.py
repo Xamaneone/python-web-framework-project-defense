@@ -6,7 +6,7 @@ from django.db import models
 UserModel = get_user_model()
 
 
-class Review(models.Model):
+class Game(models.Model):
     title = models.CharField(
         max_length=40,
     )
@@ -20,10 +20,10 @@ class Review(models.Model):
     )
 
 
-class Comment(models.Model):
+class Review(models.Model):
     text = models.TextField()
-    review = models.ForeignKey(
-        Review,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE
     )
     user = models.ForeignKey(

@@ -2,14 +2,15 @@
 
 {% block content %}
       {% for review in reviews %}
+          <a href="{% url 'game details' review.id %}">
           <table style="width:50%">
           <tr>
           <th>{{ review.title }}</th>
           <img class="card-img-top" src="{{ review.image.url }}" alt="Card image cap">
-
           <td>description: {{ review.description }}</td>
           </tr>
-          <table>
+          </table>
+          </a>
 
     {% endfor %}
 {% endblock %}

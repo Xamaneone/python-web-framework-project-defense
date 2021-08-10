@@ -1,9 +1,9 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <form action="{% url 'add review' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'add game' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
-    <button>add review</button>
+    <button>add game</button>
     </form>
 {% endblock %}
