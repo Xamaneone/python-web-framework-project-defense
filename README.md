@@ -15,3 +15,8 @@ The site is for creatiing reviews for games
 * Created forms
 * Created model forms: ReviewForm, ProfileForm
 * Created basic HTML files
+
+
+# Second comit
+
+* Added admin models
