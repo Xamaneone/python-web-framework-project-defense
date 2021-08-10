@@ -20,3 +20,12 @@ The site is for creatiing reviews for games
 # Second comit
 
 * Added admin models
+
+# Third commit
+
+* Refactored "add_review" to "add_game_for_review" in the views, urls, forms and some html files
+* Refactored model "Review" to "Game"
+* Refactored model "Comment" to "Review"
+* Added details for games
+* Added form for Review
+* Added Reviews ( Comments ) for games
