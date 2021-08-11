@@ -29,3 +29,10 @@ The site is for creatiing reviews for games
 * Added details for games
 * Added form for Review
 * Added Reviews ( Comments ) for games
+
+
+# Fourth commit
+
+* Delete/Edit comment
+* Delete/Edit game
+

@@ -1,33 +1,33 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+{#        <a class="navbar-brand" href="{% url 'index' %}">#}
+{#      <img src="{% static 'images/gamereviews_logo.png' %}" alt="" width="128" height="128">#}
+{#        </a>#}
     <div class="navbar-brand">GameReviews</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-{#        <a class="navbar-brand" href="{% url 'index' %}">#}
-{#      <img src="{% static 'images/gamereviews_logo.png' %}" alt="" width="246" height="246">#}
-{#        </a>#}
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                <a class="nav-link" href="{% url 'index' %}" style="color: #DDDDDD">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'reviews' %}">Reviews</a>
+                <a class="nav-link" href="{% url 'reviews' %}" style="color: #DDDDDD">Reviews</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'add game' %}">Add game for review</a>
+                <a class="nav-link" href="{% url 'add game' %}" style="color: #DDDDDD">Add game for review</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'about us' %}">About us</a>
+                <a class="nav-link" href="{% url 'about us' %}" style="color: #DDDDDD">About us</a>
             </li>
         </ul>
     </div>
     <div>
         {% if request.user.is_authenticated %}
-            <p><a href="{% url 'profile' %}">Logged in as: {{ request.user }}<a/><p/>
+            <p><a href="{% url 'profile' %}">Logged in as: {{ request.user }}</a></p>
             <a href="{% url 'logout' %}">LogOut</a>
         {% else %}
             <a href="{% url 'login' %}">LogIn</a>

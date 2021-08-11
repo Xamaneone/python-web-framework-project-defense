@@ -3,54 +3,86 @@
 {% load static %}
 
 {% block content %}
+    <div class="d-flex justify-content-center">
     <div class="d-flex">
         <div class="d-inline p-2 w-50">
             <img src="{{ game.image.url }}" class="w-50 rounded mx-auto d-block">
         </div>
         <div class="d-inline p-2 w-50">
-            <div class="d-flex justify-content-between">
-                <h5><u>Title:</u> {{ game.title }}</h5>
-                <h5><u>Uploaded by:</u>{{ uploader.id }}</h5>
+            <div class="d-flex justify-content-center">
+                <h5 class="d-flex justify-content-center"><u>Title:</u> {{ game.title }} </h5>
+                {#                <p><u>Uploaded by:</u>{{ uploader.user_id }}</p>#}
                 {#                <img class="card-img-top" src="{{ uploader.profile_image.url }}" alt="">#}
             </div>
             <p class="mt-2">Description: {{ game.description }}</p>
 
+            {% if request.user == game.user %}
+                <div class="d-flex justify-content-end">
+                <form action="{% url 'edit game' game.id %}" method="get">
+                    {% csrf_token %}
+                    <button class="btn btn-info" type="submit">Edit</button>
+                </form>
+                <form action="{% url 'delete game' game.id %}" method="get">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+                </div>
+            {% endif %}
+            </div>
+
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <h5><u>Uploaded by:</u> {{ uploader.user }}</h5>
     </div>
     <section class="content-item" id="comments">
         <div class="container">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="col-sm-8">
-                {% if request.user.is_authenticated %}
-                    <form method="post" action="{% url 'add review' game.id %}">
-                        {% csrf_token %}
-                        {{ review_form }}
-                        <button class="btn btn-primary mt-2" type="submit">Add review</button>
-                    </form>
-                {% else %}
-                <h3>If u want to leave a comment, you need to login first</h3>
-                {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <form method="post" action="{% url 'add review' game.id %}">
+                            {% csrf_token %}
+                            {{ review_form }}
+                            <button class="btn btn-primary mt-2" type="submit">Add review</button>
+                        </form>
+                    {% else %}
+                        <h3>If u want to leave a comment, you need to login first</h3>
+                    {% endif %}
 
                     <h3>{{ reviews.count }} Reviews</h3>
 
                     <!-- COMMENT - START -->
                     {% if reviews %}
                         {% for review in reviews %}
-                            <div class="media">
-{#                                <a class="pull-left" href="#"><img class="media-object"#}
-{#                                                                   src=""#}
-{#                                                                   alt=""></a>#}
+                            <div class="media ">
+                                {#                                <a class="pull-left" href="#"><img class="media-object"#}
+                                {#                                                                   src=""#}
+                                {#                                                                   alt=""></a>#}
                                 <div class="media-body">
+
                                     <h4 class="media-heading">{{ review.user }}</h4>
                                     <p>{{ review.text }}</p>
-{#                                    <ul class="list-unstyled list-inline media-detail pull-left">#}
-{#                                        <li><i class="fa fa-calendar"></i>27/02/2014</li>#}
-{#                                        <li><i class="fa fa-thumbs-up"></i>13</li>#}
-{#                                    </ul>#}
-{#                                    <ul class="list-unstyled list-inline media-detail pull-right">#}
-{#                                        <li class=""><a href="">Like</a></li>#}
-{#                                        <li class=""><a href="">Reply</a></li>#}
-{#                                    </ul>#}
+                                    {% if request.user == review.user %}
+                                        <div class="d-flex justify-content-end">
+                                            <form action="{% url 'edit review' review.id %}" method="get">
+                                                {% csrf_token %}
+                                                <button class="btn btn-info" type="submit">Edit</button>
+                                            </form>
+                                            <form action="{% url 'delete review' review.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
+
+                                        </div>
+                                    {% endif %}
+                                    {#                                    <ul class="list-unstyled list-inline media-detail pull-left">#}
+                                    {#                                        <li><i class="fa fa-calendar"></i>27/02/2014</li>#}
+                                    {#                                        <li><i class="fa fa-thumbs-up"></i>13</li>#}
+                                    {#                                    </ul>#}
+                                    {#                                    <ul class="list-unstyled list-inline media-detail pull-right">#}
+                                    {#                                        <li class=""><a href="">Like</a></li>#}
+                                    {#                                        <li class=""><a href="">Reply</a></li>#}
+                                    {#                                    </ul>#}
                                 </div>
                             </div>
                         {% endfor %}
