@@ -1,18 +1,25 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-      {% for review in reviews %}
-          <a href="{% url 'game details' review.id %}">
-          <table style="width:50%">
-          <tr>
-          <th>{{ review.title }}</th>
-          <img class="card-img-top" src="{{ review.image.url }}" alt="Card image cap">
-          <td>description: {{ review.description }}</td>
-          </tr>
-          </table>
-          </a>
+    <div class="row">
+        <div class="row m-auto">
+            {% for review in reviews %}
+                <div class="col-lg-4 m-auto">
+                    <div class="card m-auto">
+                        <a href="{% url 'game details' review.id %}">
+                            <table style="width:50%">
+                                <tr>
+                                    <th>{{ review.title }}</th>
+                                    <img class="card-img-bottom" src="{{ review.image.url }}" alt="Card image cap">
+                                </tr>
+                            </table>
+                        </a>
+                    </div>
+                </div>
 
-    {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 

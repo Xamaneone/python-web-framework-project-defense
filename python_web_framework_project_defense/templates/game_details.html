@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <h5><u>Uploaded by:</u> {{ uploader.user }}</h5>
+        <h5><u>Uploaded by:</u><a href="{% url 'profile' game.user_id %}">{{ uploader.user }}</a></h5>
     </div>
     <section class="content-item" id="comments">
         <div class="container">
@@ -58,9 +58,10 @@
                                 {#                                <a class="pull-left" href="#"><img class="media-object"#}
                                 {#                                                                   src=""#}
                                 {#                                                                   alt=""></a>#}
+
                                 <div class="media-body">
 
-                                    <h4 class="media-heading">{{ review.user }}</h4>
+                                    <h4 class="media-heading"><a href="{% url 'profile' review.user_id %}">{{ review.user }}</a></h4>
                                     <p>{{ review.text }}</p>
                                     {% if request.user == review.user %}
                                         <div class="d-flex justify-content-end">

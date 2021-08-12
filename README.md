@@ -36,3 +36,9 @@ The site is for creatiing reviews for games
 * Delete/Edit comment
 * Delete/Edit game
 
+
+# Fifth commit
+
+* Added profiles for the users
+* From model "Profile" removed "display_name"
+* Changed database to PostgreSQL

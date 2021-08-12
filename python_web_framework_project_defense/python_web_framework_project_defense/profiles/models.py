@@ -5,9 +5,6 @@ from django.db import models
 # Create your models here.
 
 class Profile(models.Model):
-    display_name = models.CharField(
-        max_length=150,
-    )
     age = models.IntegerField(
         blank=True,
         null=True,

@@ -1,0 +1,53 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="text-center">
+        {% if request.user == profile.user %}
+            <h1>This is your profile</h1>
+        {% else %}
+            <h1>This is {{ profile.user }} profile</h1>
+        {% endif %}
+        {% if profile.profile_image %}
+            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}" alt="" width="140"
+                 height="140">
+        {% else %}
+            <img class="rounded-circle mb-3" src="{% static 'images/generic_profile_pic.png' %}" alt="" width="140"
+                 height="140">
+        {% endif %}
+    {% if profile.age %}
+        <a>Age: {{ profile.age }}</a>
+    {% endif %}
+    <h5>Profile: {{ profile.user }}</h5>
+        {% if request.user == profile.user %}
+            <div class="w-50 m-auto">
+                <a href="{% url 'edit profile' request.user.id %}" class="btn btn-info">Edit Profile</a>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+    {% if games %}
+        <h2 class='text-center'>Your uploads</h2>
+        <div class="row">
+            <div class="row m-auto">
+                {% for game in games %}
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <img src="{{ game.image.url }}" class="card-img-bottom m-auto" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ game.title }}</h5>
+                                <a href="{% url 'game details' game.id %}" class="btn btn-primary">See details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h2>You haven't added games</h2>
+            <a href="{% url 'add game' %}" class="btn btn-success">Add Game</a>
+        </div>
+    {% endif %}
+{% endblock %}
