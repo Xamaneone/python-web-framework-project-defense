@@ -31,4 +31,3 @@ class Review(models.Model):
         on_delete=models.CASCADE,
     )
 
-###TODO COMPLETE ME
