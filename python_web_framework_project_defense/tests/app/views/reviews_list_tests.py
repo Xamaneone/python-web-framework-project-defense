@@ -13,6 +13,7 @@ class GameListTests(GamereviewsTestCase):
 
         self.assertEqual(200, response.status_code)
         self.assertListEmpty(reviews)
+        self.assertTemplateUsed(response, 'reviews.html')
 
     def test__list_games_when_not_empty__expect_list(self):
         game = Game.objects.create(
@@ -28,4 +29,5 @@ class GameListTests(GamereviewsTestCase):
 
         self.assertEqual(200, response.status_code)
         self.assertListEqual([game], reviews)
+        self.assertTemplateUsed(response, 'reviews.html')
 

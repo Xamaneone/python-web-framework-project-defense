@@ -17,6 +17,7 @@ class GameDetailsTest(GamereviewsTestCase):
 
         self.assertEqual(200, response.status_code)
         self.assertEqual(response.context['game'].user.id, self.user.id)
+        self.assertTemplateUsed(response, 'game_details.html')
 
     def test_GameDetails__when_game_exist_and_is_not_owner__expect_to_return_details(self):
         test_user = UserModel.objects.create_user(
@@ -35,6 +36,7 @@ class GameDetailsTest(GamereviewsTestCase):
 
         self.assertEqual(200, response.status_code)
         self.assertNotEqual(response.context['game'].user.id, self.user.id)
+        self.assertTemplateUsed(response, 'game_details.html')
 
     def test_game_Details__when_game_exist_without_review__expect__to_return_reviews(self):
         game = Game.objects.create(
@@ -48,6 +50,7 @@ class GameDetailsTest(GamereviewsTestCase):
 
         self.assertEqual(200, response.status_code)
         self.assertListEmpty(list(response.context['reviews']))
+        self.assertTemplateUsed(response, 'game_details.html')
 
     def test_game_Details__when_game_exist_with_review__expect_review(self):
         game = Game.objects.create(
@@ -67,3 +70,4 @@ class GameDetailsTest(GamereviewsTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(response.context['reviews'][0].user.id, review.user.id)
         self.assertListEqual([review], list(response.context['reviews']))
+        self.assertTemplateUsed(response, 'game_details.html')

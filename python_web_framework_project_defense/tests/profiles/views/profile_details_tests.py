@@ -18,6 +18,7 @@ class ProfileDetailsTest(GamereviewsTestCase):
         self.assertEqual(200, response.status_code)
         self.assertListEmpty(games)
         self.assertEqual(self.user.id, profile.user_id)
+        self.assertTemplateUsed(response, 'profile.html')
 
     def test__get_details_own_profile__when_logged_in_user_with_games__except_details_with_games(self):
         game = Game.objects.create(
@@ -34,6 +35,7 @@ class ProfileDetailsTest(GamereviewsTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(self.user.id, profile.user_id)
         self.assertListEqual([game], list(response.context['games']))
+        self.assertTemplateUsed(response, 'profile.html')
 
     def test__get_details_another_profile__when_logged_in_user__except_details_with_no_games(self):
         self.client.force_login(self.user)
@@ -47,6 +49,7 @@ class ProfileDetailsTest(GamereviewsTestCase):
         self.assertListEmpty(games)
         self.assertEqual(TestUser.id, profile.user_id)
         self.assertNotEqual(self.user.id, profile.user_id)
+        self.assertTemplateUsed(response, 'profile.html')
 
     def test__get_details_another_profile__when_logged_in_user_with_games__except_details_with_games(self):
         TestUser = UserModel.objects.create_user(username='TestUser', password='testcase')
@@ -64,6 +67,7 @@ class ProfileDetailsTest(GamereviewsTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(TestUser.id, profile.user_id)
         self.assertListEqual([game], list(response.context['games']))
+        self.assertTemplateUsed(response, 'profile.html')
 
     def test__get_details_profile__when_not_logged_in_user__except_redirect(self):
         self.client.logout()

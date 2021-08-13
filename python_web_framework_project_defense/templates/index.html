@@ -1,11 +1,8 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
-    {% if request.user.is_authenticated %}
-        <h1>Welcome {{ request.user }}!</h1>
-    {% else %}
-        <h1>Welcome! Don't have an account?</h1>
-        <h1>You can create one from <a href="{% url 'register' %}">here</a>.</h1>
-        <h1>If you already have, you can login from <a href="{% url 'login' %}">here</a>.</h1>
-    {% endif %}
+    <a href="{% url 'reviews' %}">
+    <img src="{% static 'images/background.jpg' %}" alt="">
+    </a>
 {% endblock %}
